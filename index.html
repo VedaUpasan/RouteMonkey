@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RouteMonkey</title>
+    <link rel="icon" type="image/png" href="RouteMonkey3.png">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        @font-face {
+            font-family: "MarkerFeltWide";
+            src: url("MarkerFeltWide.ttf") format("truetype");
+        }
+
+        .brand-text span {
+            font-family: "MarkerFeltWide", sans-serif !important;
+            letter-spacing: 1px;
+            /* optional nice spacing */
+        }
+
+        .section-label,
+        .section-title,
+        .service-card h3 {
+            font-family: "MarkerFeltWide", sans-serif !important;
+            letter-spacing: 0.5px;
+        }
+
+
+        :root {
+            --primary-red: #cc0000;
+            --primary-dark: #1a1a1a;
+            --primary-gray: #f5f5f5;
+            --accent-silver: #e1e1e1;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --nav-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAVBAR */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(26, 26, 26, 0.97);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 999;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffffff, var(--primary-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .brand-text span:first-child {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .brand-text span:last-child {
+            font-size: .7rem;
+            color: #ccc;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-phone i {
+            color: var(--primary-red);
+        }
+
+        .nav-cta {
+            background: var(--primary-red);
+            color: #fff;
+            padding: .5rem 1rem;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .nav-center {
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: #111;
+                padding: 1rem;
+                display: none;
+            }
+
+            .nav-center.open {
+                display: flex;
+            }
+
+            .nav-right {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        /* HERO – CENTERED VERSION */
+
+        .hero-tagline {
+            font-family: "MarkerFeltWide", sans-serif !important;
+            letter-spacing: 1px;
+            /* optional: looks cleaner with wide fonts */
+        }
+
+
+        #heroVideo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            background: #111;
+            /* helps detect if video not drawing */
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: -2;
+        }
+
+        #heroVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding-top: var(--nav-height);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            /*background: #000;*/
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .hero-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.45);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem 1.5rem;
+            margin: auto;
+        }
+
+        .hero-tagline {
+            font-size: .9rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: #ffcccc;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.3rem, 4vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .hero-title span {
+            color: var(--primary-red);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto 1.7rem;
+            color: #eaeaea;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: .5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            padding: .35rem .9rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-cta-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: .75rem 1.5rem;
+            border-radius: 50px;
+            font-size: .9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+        .hero-phone-inline {
+            display: flex;
+            justify-content: center;
+            gap: .45rem;
+            color: #f4f4f4;
+            font-size: .9rem;
+        }
+
+        /* SECTIONS */
+        main {
+            background: #fff;
+        }
+
+        .section {
+            padding: 4rem 1.5rem;
+        }
+
+        .section-alt {
+            background: var(--primary-gray);
+        }
+
+        .section-inner {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-label {
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            font-size: .8rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: .5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* ABOUT */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media(max-width: 900px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-text p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .about-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .chip {
+            padding: 0.28rem 0.7rem;
+            border-radius: 999px;
+            background: #ffffff;
+            border: 1px solid var(--accent-silver);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .about-highlight {
+            border-left: 3px solid var(--primary-red);
+            padding-left: 0.8rem;
+            margin-top: 0.9rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .about-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.2rem 1.1rem;
+            border: 1px solid var(--accent-silver);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+            font-size: 0.87rem;
+        }
+
+        .about-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .about-card ul {
+            list-style: none;
+            padding-left: 0.7rem;
+        }
+
+        .about-card ul li {
+            position: relative;
+            margin-bottom: 0.35rem;
+            padding-left: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .about-card ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+        }
+
+        /* SERVICES */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid #ddd;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        /* PRICING */
+        .pricing-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 1.1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pricing-table {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid var(--accent-silver);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+            font-size: 0.9rem;
+        }
+
+        .pricing-table h3 {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .pricing-table small {
+            color: var(--text-muted);
+        }
+
+        .pricing-rows {
+            margin-top: 0.8rem;
+            border-radius: 12px;
+            border: 1px dashed var(--accent-silver);
+            overflow: hidden;
+        }
+
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1.1fr 0.7fr 1fr;
+            gap: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            align-items: center;
+            border-bottom: 1px solid var(--accent-silver);
+        }
+
+        .pricing-row:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-row:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        .pricing-vehicle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .pricing-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(204, 0, 0, 0.06);
+            color: var(--primary-red);
+            font-size: 0.95rem;
+        }
+
+        .pricing-price {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .pricing-note {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-extras {
+            margin-top: 0.9rem;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-extras ul {
+            list-style: none;
+            margin-top: 0.25rem;
+            padding-left: 0.7rem;
+        }
+
+        .pricing-extras li {
+            position: relative;
+            margin-bottom: 0.25rem;
+            padding-left: 0.55rem;
+        }
+
+        .pricing-extras li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+        }
+
+        .pricing-side {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+            border-radius: 18px;
+            padding: 1.2rem 1.1rem;
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-side::before {
+            content: "PROMO";
+            position: absolute;
+            top: 14px;
+            right: -36px;
+            background: var(--primary-red);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 3rem;
+            transform: rotate(35deg);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .pricing-side h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-rate {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .promo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 0.7rem;
+        }
+
+        .promo-chip i {
+            color: #ffdd55;
+        }
+
+        .pricing-side p {
+            font-size: 0.86rem;
+            color: #e0e0e0;
+            margin-bottom: 0.6rem;
+        }
+
+        .pricing-side ul {
+            font-size: 0.84rem;
+            color: #cccccc;
+            list-style: none;
+            padding-left: 0.7rem;
+        }
+
+        .pricing-side li {
+            position: relative;
+            margin-bottom: 0.25rem;
+            padding-left: 0.55rem;
+        }
+
+        .pricing-side li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+        }
+
+        /* REVIEWS */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .review-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem 1.3rem;
+            border: 1px solid var(--accent-silver);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .review-stars {
+            font-size: 1.2rem;
+            color: #ffb400;
+            margin-bottom: 0.75rem;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+
+
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.1rem 1.1rem 1.3rem;
+            border: 1px solid var(--accent-silver);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+            font-size: 0.9rem;
+        }
+
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-line i {
+            color: var(--primary-red);
+        }
+
+        .contact-line a {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            font-size: 0.88rem;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.22rem;
+        }
+
+        .field-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .field-group input,
+        .field-group textarea,
+        .field-group select {
+            border-radius: 10px;
+            border: 1px solid var(--accent-silver);
+            padding: 0.55rem 0.65rem;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+        }
+
+        .field-group input:focus,
+        .field-group textarea:focus,
+        .field-group select:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 1px rgba(204, 0, 0, 0.3);
+        }
+
+        .field-inline {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        @media (max-width: 600px) {
+            .field-inline {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        .btn-submit {
+            background: var(--primary-red);
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 0.7rem 1.3rem;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 0.2rem;
+            box-shadow: 0 8px 22px rgba(204, 0, 0, 0.6);
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(204, 0, 0, 0.75);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #111;
+            color: #ccc;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="nav">
+        <div class="nav-left">
+            <img src="RouteMonkey3.png" alt="RouteMonkey Logo" class="logo-img">
+            <div class="brand-text">
+                <span>RouteMonkey</span>
+            </div>
+        </div>
+
+        <nav class="nav-center" id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#prices">Prices</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-right">
+            <div class="nav-phone"><i class="fa fa-phone"></i> <a href="tel:+16175550199">(617) 555-0199</a></div>
+            <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                Book a Truck
+            </button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle"><i class="fa fa-bars"></i></div>
+    </header>
+
+    <!-- HERO – UPDATED -->
+    <section class="hero" id="home">
+        <style>
+            /* Fade transition between videos */
+            #heroVideoA,
+            #heroVideoB {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: opacity 1.4s ease;
+            }
+        </style>
+        <div class="hero-video-bg">
+            <video id="heroVideoA" muted playsinline></video>
+            <video id="heroVideoB" muted playsinline></video>
+        </div>
+
+        <script>
+            const videoList = [
+                "1.mp4",
+                "2.mov",
+                "3.mp4",
+                "4.mp4"
+            ];
+
+            let index = 0;
+            let active = true;
+
+            const vidA = document.getElementById("heroVideoA");
+            const vidB = document.getElementById("heroVideoB");
+
+            // preload first video
+            vidA.src = videoList[index];
+            vidA.play();
+
+            function switchVideo() {
+                index = (index + 1) % videoList.length;
+
+                if (active) {
+                    vidB.src = videoList[index];
+                    vidB.play();
+
+                    vidB.style.opacity = 1;
+                    vidA.style.opacity = 0;
+                } else {
+                    vidA.src = videoList[index];
+                    vidA.play();
+
+                    vidA.style.opacity = 1;
+                    vidB.style.opacity = 0;
+                }
+
+                active = !active;
+            }
+
+            vidA.addEventListener("ended", switchVideo);
+            vidB.addEventListener("ended", switchVideo);
+        </script>
+
+
+
+
+
+        </div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-tagline">Delivery That Doesn’t Break the Bank — Let the Monkey Handle It.</div>
+
+            <h1 class="hero-title">
+                <span>Local & Short-Distance</span> Trucking Partner
+            </h1>
+
+            <p class="hero-subtitle">
+                Transparent, driver-included pricing using Ryder’s fleet — perfect for retail, warehouses, vendors
+                & small business distribution.
+            </p>
+
+            <div class="hero-cta-row">
+                <button class="btn-primary"
+                    onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                    <i class="fa fa-phone"></i> Contact Us
+                </button>
+                <button class="btn-secondary"
+                    onclick="document.getElementById('prices').scrollIntoView({behavior:'smooth'})">
+                    <i class="fa fa-dollar-sign"></i> View Prices
+                </button>
+            </div>
+
+            <div class="hero-phone-inline">
+                <i class="fa fa-headset"></i> Talk to dispatch:
+                <a href="tel:+16175550199">(617) 555-0199</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="section section-alt" id="about">
+        <div class="section-inner">
+            <div class="section-label">About RouteMonkey</div>
+            <p class="section-subtitle">
+                RouteMonkey is a Boston-based operation that understands how much every pallet, rack, and delivery
+                window matters to your business.
+            </p>
+            <p>
+                RouteMonkey specializes in <strong>short-distance local distribution</strong> for small and
+                medium businesses across the Boston region — from <strong>warehouses and suppliers</strong>
+                to
+                <strong>retail locations and growing e-commerce brands</strong>.
+                While major carriers focus on large contracts, many businesses are left with
+                <strong>high minimums, rigid schedules, or unreliable local options</strong>. RouteMonkey
+                fills that gap
+                with <strong>flexible scheduling, fair pricing, and real humans you can talk to.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+        <div class="section-inner reveal">
+            <div class="section-label">Services</div>
+            <h2 class="section-title">Built Around Real-World Routes, Vendors, and Store Operations.</h2>
+            <p class="section-subtitle">
+                Our service menu is tailored to how modern retail, warehousing, and distribution teams actually
+                operate —
+                with both <strong>on-demand runs</strong> and <strong>repeat weekly routes</strong>.
+            </p>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                    <h3>Local Warehouse-to-Store Hauls</h3>
+                    <p>
+                        Fast, reliable trucking between warehouses, stockrooms, and storefronts — keeping your inventory
+                        moving.
+                    </p>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3>Inter-Store & Vendor Transfers</h3>
+                    <p>
+                        Smooth transfers between store locations or vendor sites with consistent, predictable routing.
+                    </p>
+
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3>On-Demand & Scheduled Runs</h3>
+                    <p>
+                        Same-day deliveries or planned weekly routes — flexible to match your busy hours and seasonal
+                        needs.
+                    </p>
+
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <h3>Tracking, POD & Digital Invoicing</h3>
+                    <p>
+                        Clear tracking, instant proof of delivery, and clean digital invoicing your team can depend on.
+                    </p>
+
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <h3>Inventory Pickup Verification</h3>
+                    <p>
+                        Optional pickup checks with counts and notes so every load is accurate and trusted.
+                    </p>
+
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                    <h3>Special Handling Options</h3>
+                    <p>
+                        Fragile or sensitive items? We tailor handling protocols to keep your goods safe at every step.
+                    </p>
+
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICES -->
+    <section class="section section-alt" id="prices">
+        <div class="section-inner">
+            <div class="section-label">Pricing</div>
+            <h2 class="section-title">Simple, Transparent Rates.</h2>
+
+            <p class="section-subtitle">
+                No hidden fees, no guesswork. All rates include a professional driver. Talk to us about multi-stop
+                routes,
+                recurring schedules, and volume discounts.
+            </p>
+
+            <div class="pricing-layout">
+                <!-- In-City Pricing -->
+                <div class="pricing-table">
+                    <h3>In-City Boston Pricing</h3>
+                    <small>All prices include driver • 2-hour minimum per trip</small>
+
+                    <div class="pricing-rows">
+                        <div class="pricing-row">
+                            <div class="pricing-vehicle">
+                                <div class="pricing-icon">
+                                    <!-- You can replace these emojis with your own small PNG/SVG icons -->
+                                    🚐
+                                </div>
+                                <span>Cargo Van</span>
+                            </div>
+                            <div class="pricing-price">$75/hr</div>
+                            <div class="pricing-note">Ideal for light loads & smaller runs.</div>
+                        </div>
+
+                        <div class="pricing-row">
+                            <div class="pricing-vehicle">
+                                <div class="pricing-icon">
+                                    🚛
+                                </div>
+                                <span>16 ft Truck</span>
+                            </div>
+                            <div class="pricing-price">$85/hr</div>
+                            <div class="pricing-note">Great for store replenishment routes.</div>
+                        </div>
+
+                        <div class="pricing-row">
+                            <div class="pricing-vehicle">
+                                <div class="pricing-icon">
+                                    🛻
+                                </div>
+                                <span>22–26 ft Truck</span>
+                            </div>
+                            <div class="pricing-price">$95/hr</div>
+                            <div class="pricing-note">For larger pallets and bulk transfers.</div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-extras">
+                        <strong>Extras:</strong>
+                        <ul>
+                            <li>After-hours & weekends: <strong>+ $10/hr</strong></li>
+                            <li>Extra stop: <strong>$20</strong></li>
+                            <li>Driver wait time: <strong>$30/hr</strong></li>
+                            <li>Heavy load surcharge: <strong>+ $0.25/mi</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Out-City Pricing -->
+                <aside class="pricing-side">
+                    <h3>Out-City & Regional (Massachusetts)</h3>
+                    <div class="promo-rate">$4.00/mile</div>
+                    <div class="promo-chip">
+                        <i class="fa-solid fa-bolt"></i>
+                        6-month promotional rate
+                    </div>
+
+                    <ul>
+                        <li>Standard rate: <strong>$4.50–$5.00/mile</strong> after the promo period.</li>
+                        <li>Discounted pricing for route miles over <strong>60 miles</strong>.</li>
+                        <li>All rates include a professional driver.</li>
+                    </ul>
+
+                    <p style="margin-top:0.85rem; font-size:0.82rem; color:#bbbbbb;">
+                        Tell us your lanes and volume, and we’ll shape a simple, predictable rate structure that
+                        keeps your cost per delivery in control.
+                    </p>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section class="section" id="reviews">
+        <div class="section-inner reveal">
+            <div class="section-label">Reviews</div>
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">
+                Trusted by vendors, warehouses, retailers, and small businesses across Massachusetts.
+            </p>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">
+                        “Reliable, fast, and transparent. RouteMonkey handles our weekly warehouse-to-store runs
+                        flawlessly.”
+                    </p>
+                    <div class="review-author">— Boston Retail Distribution Manager</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">
+                        “The per-mile pricing is a game changer. No surprises, no delays — just smooth logistics.”
+                    </p>
+                    <div class="review-author">— Cambridge Vendor Supply Partner</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">
+                        “We switched from a bigger carrier and never looked back. More flexible and more affordable.”
+                    </p>
+                    <div class="review-author">— Somerville Small Business Owner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+        <div class="section-inner reveal">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">Ready to Move Your Next Load?</h2>
+            <p class="section-subtitle">
+                Share a bit about your routes, locations, and frequency. We’ll respond with availability and a clear
+                quote —
+                no obligation, no spam.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3 style="margin-bottom:0.7rem;">Get in touch with RouteMonkey</h3>
+
+                    <div class="contact-line">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Call dispatch:&nbsp;</span>
+                        <a href="tel:+16175550199">(617) 555-0199</a>
+                    </div>
+
+                    <div class="contact-line">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:info@routemonkey.com">info@routemonkey.com</a>
+                    </div>
+
+                    <div class="contact-line">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Boston, Massachusetts</span>
+                    </div>
+
+                    <p style="margin-top:0.7rem; font-size:0.86rem; color:var(--text-muted);">
+                        <strong>Hours:</strong><br />
+                        Mon–Fri: 7:00 AM – 8:00 PM<br />
+                        Sat–Sun: On-demand & scheduled runs
+                    </p>
+
+                </div>
+
+                <div class="contact-card">
+                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="field-inline">
+                            <div class="field-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required />
+                            </div>
+                            <div class="field-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Business or store name" />
+                            </div>
+                        </div>
+
+                        <div class="field-inline">
+                            <div class="field-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+                            </div>
+                            <div class="field-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Best number to reach you" />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="serviceType">What do you need?</label>
+                            <select id="serviceType" name="serviceType">
+                                <option value="">Select an option</option>
+                                <option value="warehouse">Warehouse ➜ Store runs</option>
+                                <option value="inter-store">Inter-store transfers</option>
+                                <option value="vendor">Vendor / supplier routes</option>
+                                <option value="on-demand">On-demand & urgent deliveries</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="message">Route details</label>
+                            <textarea id="message" name="message"
+                                placeholder="Share pickup & drop-off locations, frequency (daily/weekly), and ideal start date."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Send Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        © <span id="year"></span> RouteMonkey – Boston Logistics
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById("navToggle").onclick = () => {
+            document.getElementById("navMenu").classList.toggle("open");
+        };
+    </script>
+
+</body>
+
+</html>
